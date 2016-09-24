@@ -1,4 +1,4 @@
-package Week1.LabWork1.Task1;
+package Week1.LabWork1.Task2;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -26,7 +26,7 @@ public class Solution {
 
         //���������� ����� � ����
         BufferedWriter writer = new BufferedWriter(new FileWriter("aplusb.out"));
-        writer.write(String.valueOf(a+b));
+        writer.write(String.valueOf(a+b*b));
 
         //��������� ������
         if (fileReader!=null) fileReader.close();
