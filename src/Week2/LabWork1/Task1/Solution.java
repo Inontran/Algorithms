@@ -1,9 +1,6 @@
-package Week2.LabWork2.Task1;
+package Week2.LabWork1.Task1;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
+import java.io.*;
 import java.util.Arrays;
 import java.util.StringTokenizer;
 
@@ -11,27 +8,23 @@ import java.util.StringTokenizer;
  * Created by Inontran on 26.09.2016.
  */
 public class Solution {
+    public static int[] array;
+    public static BufferedWriter writer;
     public static void main(String[] args) throws Exception{
         long start = System.currentTimeMillis();
 
         BufferedReader fileReader = new BufferedReader(new FileReader("sort.in"));
         int n = Integer.parseInt(fileReader.readLine());
-        int[] array = new int[n];
+        array = new int[n];
         StringTokenizer tokenizer = new StringTokenizer(fileReader.readLine(), " \t");
         int i = 0;
         while (tokenizer.hasMoreTokens()) array[i++] = Integer.parseInt(tokenizer.nextToken());
 
 
-//        array = mergeSort(array);
-        int m = array.length/2;
-        int[] array1 = Arrays.copyOfRange(array, 0, m);
-        int[] array2 = Arrays.copyOfRange(array, m, array.length);
-        Arrays.sort(array1);
-        Arrays.sort(array2);
+
+        writer = new BufferedWriter(new FileWriter("sort.out"));
         array = mergeSort(array);
 
-
-        BufferedWriter writer = new BufferedWriter(new FileWriter("sort.out"));
         for (i = 0; i < array.length; i++)
         {
             writer.write(String.valueOf(array[i]));
@@ -57,7 +50,9 @@ public class Solution {
         int[] aL = Arrays.copyOfRange(a, 0, m);
         int[] aR = Arrays.copyOfRange(a, m, a.length);
         aL = mergeSort(aL);
+        searchIndex(aL);
         aR = mergeSort(aR);
+        searchIndex(aR);
         return merge(aL, aR);
     }
 
@@ -84,5 +79,22 @@ public class Solution {
         for ( ; j < b.length; ) ans[indexAns++] = b[j++];
         for ( ; i < a.length; ) ans[indexAns++] = a[i++];
         return ans;
+    }
+
+    public static void searchIndex(int[] a)
+    {
+        for (int i = 0; i <= array.length - a.length; i++)
+        {
+            int[] partOfArray = Arrays.copyOfRange(array, i, i+a.length);
+            if (Arrays.equals(partOfArray, a))
+            {
+                try {
+                    writer.write(String.valueOf(i+1 + " " + (i + a.length) + " " + a[0] + " " + a[a.length - 1]));
+                    writer.write(System.lineSeparator());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 }
