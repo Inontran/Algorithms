@@ -78,6 +78,8 @@ public class Solution {
         }
         for ( ; j < b.length; ) ans[indexAns++] = b[j++];
         for ( ; i < a.length; ) ans[indexAns++] = a[i++];
+//        for (i = 0; i < ans.length; i++) System.out.print(ans[i] + " ");
+//        System.out.println();
         return ans;
     }
 
